@@ -28,6 +28,8 @@ namespace RoguelikeGame
 
         public static DungeonMap DungeonMap { get; private set; }
 
+        public static Player Player { get; private set; }
+
         public static void Main(string[] args)
         {
             string fontFileName = "terminal8x8.png";
@@ -40,8 +42,11 @@ namespace RoguelikeGame
             statConsole = new RLConsole(statWidth, statHeight);
             inventoryConsole = new RLConsole(inventoryWidth, inventoryHeioght);
 
+            Player = new Player();
+
             MapGenerator mapGenerator = new MapGenerator(mapWidth, mapHeight);
             DungeonMap = mapGenerator.CreateMap();
+            DungeonMap.UpdatePlayerFieldOfView();
             
             rootConsole.Update += OnRootConsoleUpdate;
             rootConsole.Render += OnRootConsoleRender;
@@ -66,6 +71,7 @@ namespace RoguelikeGame
         private static void OnRootConsoleRender(object sender, UpdateEventArgs e)
         {
             DungeonMap.Draw(mapConsole);
+            Player.Draw(mapConsole, DungeonMap);
 
             RLConsole.Blit(mapConsole, 0, 0, mapWidth, mapHeight, rootConsole, 0, inventoryHeioght);
             RLConsole.Blit(statConsole, 0, 0, statWidth, statHeight, rootConsole, mapWidth, 0);
