@@ -32,7 +32,7 @@ namespace RoguelikeGame
 
         public static DungeonMap DungeonMap { get; private set; }
 
-        public static Player Player { get; private set; }
+        public static Player Player { get; set; }
 
         public static CommandSystem CommandSystem { get; private set; }
 
@@ -53,8 +53,6 @@ namespace RoguelikeGame
             messageConsole = new RLConsole(messageWidth, messageHeight);
             statConsole = new RLConsole(statWidth, statHeight);
             inventoryConsole = new RLConsole(inventoryWidth, inventoryHeight);
-
-            Player = new Player();
 
             MapGenerator mapGenerator = new MapGenerator(mapWidth, mapHeight, 20, 13, 7);
             DungeonMap = mapGenerator.CreateMap();
