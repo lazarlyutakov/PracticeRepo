@@ -1,6 +1,8 @@
 ﻿using RLNET;
 using RoguelikeGame.Core;
 using RoguelikeGame.Systrems;
+using RogueSharp.Random;
+using System;
 
 namespace RoguelikeGame
 {
@@ -34,10 +36,16 @@ namespace RoguelikeGame
 
         public static CommandSystem CommandSystem { get; private set; }
 
+        public static IRandom Random { get; private set; }
+
         public static void Main(string[] args)
         {
-            string fontFileName = "terminal8x8.png";
-            string consoleTitle = "Rugeulike Game - Level 1";
+            int seed = (int)DateTime.UtcNow.Ticks;
+            Random = new DotNetRandom(seed);
+
+            string consoleTitle = $"RogueSharp V3 Tutorial - Level 1 - Seed {seed}";
+
+            string fontFileName = "terminal8x8.png";            
 
             // initialize consoles
             rootConsole = new RLRootConsole(fontFileName, screenWidth, screenHeight, 8, 8, 1f, consoleTitle);
@@ -48,7 +56,7 @@ namespace RoguelikeGame
 
             Player = new Player();
 
-            MapGenerator mapGenerator = new MapGenerator(mapWidth, mapHeight);
+            MapGenerator mapGenerator = new MapGenerator(mapWidth, mapHeight, 20, 13, 7);
             DungeonMap = mapGenerator.CreateMap();
             DungeonMap.UpdatePlayerFieldOfView();
 
@@ -113,9 +121,7 @@ namespace RoguelikeGame
                 messageConsole.Clear();
 
                 // DungeonMap.Draw(mapConsole, statConsole);
-                Player.Draw(mapConsole, DungeonMap);
-                
-                
+                Player.Draw(mapConsole, DungeonMap);                                
 
                 DungeonMap.Draw(mapConsole);
                 Player.Draw(mapConsole, DungeonMap);
