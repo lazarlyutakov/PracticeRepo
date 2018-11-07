@@ -30,11 +30,15 @@ namespace RoguelikeGame
 
         private static bool renderRequired = true;
 
+        private static int _steps = 0;
+
         public static DungeonMap DungeonMap { get; private set; }
 
         public static Player Player { get; set; }
 
         public static CommandSystem CommandSystem { get; private set; }
+
+        public static MessageLog MessageLog { get; private set; }
 
         public static IRandom Random { get; private set; }
 
@@ -45,7 +49,11 @@ namespace RoguelikeGame
 
             string consoleTitle = $"RogueSharp V3 Tutorial - Level 1 - Seed {seed}";
 
-            string fontFileName = "terminal8x8.png";            
+            string fontFileName = "terminal8x8.png";
+
+            MessageLog = new MessageLog();
+            MessageLog.Add("The rogue arrives at level 1");
+            MessageLog.Add($"Level created with seed {seed}");
 
             // initialize consoles
             rootConsole = new RLRootConsole(fontFileName, screenWidth, screenHeight, 8, 8, 1f, consoleTitle);
@@ -62,9 +70,6 @@ namespace RoguelikeGame
 
             rootConsole.Update += OnRootConsoleUpdate;
             rootConsole.Render += OnRootConsoleRender;
-
-            messageConsole.SetBackColor(0, 0, messageWidth, messageHeight, Swatch.DbDeepWater);
-            messageConsole.Print(1, 1, "Messages", Colors.TextHeading);
 
             statConsole.SetBackColor(0, 0, statWidth, statHeight, Swatch.DbOldStone);
             statConsole.Print(1, 1, "Stats", Colors.TextHeading);
@@ -106,6 +111,7 @@ namespace RoguelikeGame
 
             if (didPlayerAct)
             {
+                MessageLog.Add($"Step #{++_steps}");
                 renderRequired = true;
             }
         }
@@ -119,7 +125,8 @@ namespace RoguelikeGame
                 messageConsole.Clear();
 
                 // DungeonMap.Draw(mapConsole, statConsole);
-                Player.Draw(mapConsole, DungeonMap);                                
+                Player.Draw(mapConsole, DungeonMap);
+                MessageLog.Draw(messageConsole);
 
                 DungeonMap.Draw(mapConsole);
                 Player.Draw(mapConsole, DungeonMap);
