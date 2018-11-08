@@ -10,5 +10,12 @@ namespace RoguelikeGame.Interfaces
     {
         string Name { get; set; }
         int Awarness { get; set; }
+        int AttackChance { get; set; }
+        int Defense { get; set; }
+        int DefenseChance {get;set;}
+        int Gold { get; set; }
+        int Health { get; set; }
+        int MaxHealth { get; set; }
+        int Speed { get; set; }
     }
 }

@@ -30,8 +30,6 @@ namespace RoguelikeGame
 
         private static bool renderRequired = true;
 
-        private static int _steps = 0;
-
         public static DungeonMap DungeonMap { get; private set; }
 
         public static Player Player { get; set; }
@@ -71,9 +69,6 @@ namespace RoguelikeGame
             rootConsole.Update += OnRootConsoleUpdate;
             rootConsole.Render += OnRootConsoleRender;
 
-            statConsole.SetBackColor(0, 0, statWidth, statHeight, Swatch.DbOldStone);
-            statConsole.Print(1, 1, "Stats", Colors.TextHeading);
-
             inventoryConsole.SetBackColor(0, 0, inventoryWidth, inventoryHeight, Swatch.DbWood);
             inventoryConsole.Print(1, 1, "Inventory", Colors.TextHeading);
 
@@ -111,7 +106,6 @@ namespace RoguelikeGame
 
             if (didPlayerAct)
             {
-                MessageLog.Add($"Step #{++_steps}");
                 renderRequired = true;
             }
         }
@@ -130,6 +124,8 @@ namespace RoguelikeGame
 
                 DungeonMap.Draw(mapConsole);
                 Player.Draw(mapConsole, DungeonMap);
+                Player.DrawStats(statConsole);
+
                 RLConsole.Blit(mapConsole, 0, 0, mapWidth, mapHeight, rootConsole, 0, inventoryHeight);
                 RLConsole.Blit(messageConsole, 0, 0, messageWidth, messageHeight, rootConsole, 0, screenHeight - messageHeight);
                 RLConsole.Blit(statConsole, 0, 0, statWidth, statHeight, rootConsole, mapWidth, 0);
