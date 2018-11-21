@@ -1,5 +1,7 @@
 ﻿using RoguelikeGame.Core;
+using RoguelikeGame.Monsters;
 using RogueSharp;
+using RogueSharp.DiceNotation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -74,6 +76,7 @@ namespace RoguelikeGame.Systrems
             }
 
             PlacePlayer();
+            PlaceMonster();
 
             return _map;
         }
@@ -102,6 +105,31 @@ namespace RoguelikeGame.Systrems
             player.Y = _map.Rooms[0].Center.Y;
 
             _map.AddPlayer(player);
+        }
+
+        private void PlaceMonster()
+        {
+            foreach (var room in _map.Rooms)
+            {
+                if (Dice.Roll("1D10") < 7)
+                {
+                    var numberOfMonsters = Dice.Roll("1D4");
+
+                    for (int i = 0; i < numberOfMonsters; i++)
+                    {
+                        Point randomRoomLocation = (Point)_map.GetRandomWalkableLocationInRoom(room);
+
+                        if (randomRoomLocation != null)
+                        {
+                            var monster = Kobold.Create(1);
+                            monster.X = randomRoomLocation.X;
+                            monster.Y = randomRoomLocation.Y;
+                            _map.AddMonster(monster);
+
+                        }
+                    }
+                }
+            }
         }
 
         private void CreateHorizontalTunnel(int xStart, int xEnd, int yPosition)
