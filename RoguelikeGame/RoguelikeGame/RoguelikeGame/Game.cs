@@ -118,11 +118,9 @@ namespace RoguelikeGame
                 statConsole.Clear();
                 messageConsole.Clear();
 
-                // DungeonMap.Draw(mapConsole, statConsole);
+                DungeonMap.Draw(mapConsole, statConsole);               
                 Player.Draw(mapConsole, DungeonMap);
                 MessageLog.Draw(messageConsole);
-
-                DungeonMap.Draw(mapConsole);
                 Player.Draw(mapConsole, DungeonMap);
                 Player.DrawStats(statConsole);
 

@@ -19,17 +19,24 @@ namespace RoguelikeGame.Core
             _monsters = new List<Monster>();
         }
 
-        public void Draw(RLConsole mapConsole)
+        public void Draw(RLConsole mapConsole, RLConsole statConsole)
         {
-            mapConsole.Clear();
             foreach (var cell in GetAllCells())
             {
                 SetConsoleSymbolForCell(mapConsole, cell);
             }
 
+            int i = 0;
+
             foreach (var monster in _monsters)
             {
                 monster.Draw(mapConsole, this);
+
+                if (IsInFov(monster.X, monster.Y))
+                {
+                    monster.DrawStats(statConsole, i);
+                    i++;
+                }
             }
         }
 
