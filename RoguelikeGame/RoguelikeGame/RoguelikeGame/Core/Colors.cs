@@ -27,5 +27,6 @@ namespace RoguelikeGame.Core
         public static RLColor Gold = Swatch.DbSun;
 
         public static RLColor KoboldColor = Swatch.DbBrightWood;
+        public static RLColor DzveroColor = Swatch.DbMetal;
     }
 }

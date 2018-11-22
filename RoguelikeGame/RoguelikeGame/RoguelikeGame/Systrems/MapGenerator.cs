@@ -122,9 +122,16 @@ namespace RoguelikeGame.Systrems
                         if (randomRoomLocation != null)
                         {
                             var monster = Kobold.Create(1);
+                            // var dzveroMonster = Dzvero.Create(2);
+
                             monster.X = randomRoomLocation.X;
                             monster.Y = randomRoomLocation.Y;
+
+                            // dzveroMonster.X = randomRoomLocation.X;
+                            // dzveroMonster.Y = randomRoomLocation.Y;
+
                             _map.AddMonster(monster);
+                            // _map.AddMonster(dzveroMonster);
 
                         }
                     }
