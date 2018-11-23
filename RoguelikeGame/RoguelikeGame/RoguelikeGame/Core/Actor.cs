@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace RoguelikeGame.Core
 {
-    public class Actor : IActor, IDrawable
+    public class Actor : IActor, IDrawable, ISchedulable
     {
         private int _attack;
         private int _attackChance;
@@ -145,6 +145,14 @@ namespace RoguelikeGame.Core
         public char Symbol { get; set; }
         public int X { get; set; }
         public int Y { get; set; }
+
+        public int Time
+        {
+            get
+            {
+                return Speed;
+            }
+        }
 
         public void Draw(RLConsole console, IMap map)
         {

@@ -1,4 +1,6 @@
 ﻿using RoguelikeGame.Core;
+using RoguelikeGame.Interfaces;
+using RogueSharp;
 using RogueSharp.DiceNotation;
 using System;
 using System.Collections.Generic;
@@ -10,6 +12,7 @@ namespace RoguelikeGame.Systrems
 {
     public class CommandSystem
     {
+        public bool IsPlayerTurn { get; set; }
         public bool MovePlayer(Direction direction)
         {
             int x = Game.Player.X;
@@ -48,6 +51,46 @@ namespace RoguelikeGame.Systrems
             }
 
             return false;
+        }
+
+        public void EndPLayerTurn()
+        {
+            IsPlayerTurn = false;
+        }
+
+        public void ActivateMonsters()
+        {
+            ISchedulable scheduleable = Game.SchedulingSystem.Get();
+
+            if (scheduleable is Player)
+            {
+                IsPlayerTurn = true;
+                Game.SchedulingSystem.Add(Game.Player);
+
+            }
+            else
+            {
+                Monster monster = scheduleable as Monster;
+
+                if (monster != null)
+                {
+                    monster.PerformAction(this);
+                    Game.SchedulingSystem.Add(monster);
+                }
+
+                ActivateMonsters();
+            }
+        }
+
+        public void MoveMonster(Monster monster, Cell cell)
+        {
+            if (!Game.DungeonMap.SetActorPosition(monster, cell.X, cell.Y))
+            {
+                if (Game.Player.X == cell.X && Game.Player.Y == cell.Y)
+                {
+                    Attack(monster, Game.Player);
+                }
+            }
         }
 
         private void Attack(Actor attacker, Actor defender)
@@ -149,5 +192,7 @@ namespace RoguelikeGame.Systrems
             }
             return hits;
         }
+
+        
     }
 }
