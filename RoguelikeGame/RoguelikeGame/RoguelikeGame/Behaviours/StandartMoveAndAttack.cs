@@ -54,7 +54,7 @@ namespace RoguelikeGame.Behaviours
                 {
                     try
                     {
-                        commandSystem.MoveMonster(monster, (Cell)path.Steps.First());
+                        commandSystem.MoveMonster(monster, (Cell)path.StepForward());
                     }
                     catch (NoMoreStepsException)
                     {

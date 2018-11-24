@@ -118,21 +118,21 @@ namespace RoguelikeGame.Systrems
                     for (int i = 0; i < numberOfMonsters; i++)
                     {
                         Point randomRoomLocation = (Point)_map.GetRandomWalkableLocationInRoom(room);
-                        // Point randomRoomLocation2 = (Point)_map.GetRandomWalkableLocationInRoom(room);
+                        Point randomRoomLocation2 = (Point)_map.GetRandomWalkableLocationInRoom(room);
 
                         if (randomRoomLocation != null)
                         {
                             var monster = Kobold.Create(1);
-                            // var dzveroMonster = Dzvero.Create(2);
+                            var dzveroMonster = Dzvero.Create(2);
 
                             monster.X = randomRoomLocation.X;
                             monster.Y = randomRoomLocation.Y;
 
-                             // dzveroMonster.X = randomRoomLocation2.X;
-                             // dzveroMonster.Y = randomRoomLocation2.Y;
+                             dzveroMonster.X = randomRoomLocation2.X;
+                             dzveroMonster.Y = randomRoomLocation2.Y;
 
                             _map.AddMonster(monster);
-                            // _map.AddMonster(dzveroMonster);
+                            _map.AddMonster(dzveroMonster);
 
                         }
                     }
