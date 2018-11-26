@@ -28,6 +28,8 @@ namespace RoguelikeGame
         private static readonly int inventoryHeight = 11;
         private static RLConsole inventoryConsole;
 
+        private static int _mapLevel = 1;
+
         private static bool renderRequired = true;
 
         public static DungeonMap DungeonMap { get; private set; }
@@ -61,9 +63,11 @@ namespace RoguelikeGame
             statConsole = new RLConsole(statWidth, statHeight);
             inventoryConsole = new RLConsole(inventoryWidth, inventoryHeight);
 
+            string consoleTitile = $"RougeSharp V3 Tutorial - Level {_mapLevel} - Seed {seed}";
+
             SchedulingSystem = new SchedulingSystem();
 
-            MapGenerator mapGenerator = new MapGenerator(mapWidth, mapHeight, 20, 13, 7);
+            MapGenerator mapGenerator = new MapGenerator(mapWidth, mapHeight, 20, 13, 7, _mapLevel);
             DungeonMap = mapGenerator.CreateMap();
             DungeonMap.UpdatePlayerFieldOfView();
 
@@ -106,6 +110,18 @@ namespace RoguelikeGame
                     else if (keyPress.Key == RLKey.Escape)
                     {
                         rootConsole.Close();
+                    }
+                    else if (keyPress.Key == RLKey.Period)
+                    {
+                        if (DungeonMap.CanMoveDownToNextLevel())
+                        {
+                            MapGenerator mapGenerator = new MapGenerator(mapWidth, mapHeight, 20, 13, 7, _mapLevel);
+                            DungeonMap = mapGenerator.CreateMap();
+                            MessageLog = new MessageLog();
+                            CommandSystem = new CommandSystem();
+                            rootConsole.Title = $"RogueSharp RLNet Tutorial - Level {_mapLevel}";
+                            didPlayerAct = true;
+                        }
                     }
                 }
                 if (didPlayerAct)

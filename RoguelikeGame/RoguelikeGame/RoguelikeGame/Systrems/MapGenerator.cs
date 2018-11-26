@@ -20,7 +20,7 @@ namespace RoguelikeGame.Systrems
 
         private readonly DungeonMap _map;
 
-        public MapGenerator(int width, int height, int maxRooms, int roomMaxSize, int roomMinSize)
+        public MapGenerator(int width, int height, int maxRooms, int roomMaxSize, int roomMinSize, int mapLevel)
         {
             _width = width;
             _heght = height;
@@ -75,6 +75,8 @@ namespace RoguelikeGame.Systrems
                 CreateRoom(room);
                 CreateDoors(room);
             }
+
+            CreateStairs();
 
             PlacePlayer();
             PlaceMonster();
@@ -179,6 +181,22 @@ namespace RoguelikeGame.Systrems
             }
         }
 
+        private void CreateStairs()
+        {
+            _map.StairsUp = new Stairs
+            {
+                X = _map.Rooms.First().Center.X + 1,
+                Y = _map.Rooms.First().Center.Y,
+                IsUp = true
+            };
+
+            _map.StairsDown = new Stairs
+            {
+                X = _map.Rooms.Last().Center.X,
+                Y = _map.Rooms.Last().Center.Y,
+                IsUp = false
+            };
+        }
         private bool IsPotentialDoor(ICell cell)
         {
             if (!cell.IsWalkable)
