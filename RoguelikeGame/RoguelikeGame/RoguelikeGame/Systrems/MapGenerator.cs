@@ -73,6 +73,7 @@ namespace RoguelikeGame.Systrems
             foreach (var room in _map.Rooms)
             {
                 CreateRoom(room);
+                CreateDoors(room);
             }
 
             PlacePlayer();
@@ -154,6 +155,58 @@ namespace RoguelikeGame.Systrems
             {
                 _map.SetCellProperties(xPosition, y, true, true);
             }
+        }
+
+        private void CreateDoors(Rectangle room)
+        {
+            int xMin = room.Left;
+            int xMax = room.Right;
+            int yMin = room.Top;
+            int yMax = room.Bottom;
+
+            List<ICell> borderCell = _map.GetCellsAlongLine(xMin, yMin, xMax, yMax).ToList();
+            borderCell.AddRange(_map.GetCellsAlongLine(xMin, yMin, xMin, yMax));
+            borderCell.AddRange(_map.GetCellsAlongLine(xMin, yMax, xMax, yMax));
+            borderCell.AddRange(_map.GetCellsAlongLine(xMax, yMin, xMax, yMax));
+
+            foreach (var cell in borderCell)
+            {
+                if (IsPotentialDoor(cell))
+                {
+                    _map.SetCellProperties(cell.X, cell.Y, false, true);
+                    _map.Doors.Add(new Door { X = cell.X, Y = cell.Y, IsOpen = false });
+                }
+            }
+        }
+
+        private bool IsPotentialDoor(ICell cell)
+        {
+            if (!cell.IsWalkable)
+            {
+                return false;
+            }
+
+            var right = _map.GetCell(cell.X + 1, cell.Y);
+            var left = _map.GetCell(cell.X - 1, cell.Y);
+            var top = _map.GetCell(cell.X, cell.Y - 1);
+            var bottom = _map.GetCell(cell.X, cell.Y + 1);
+
+            if (_map.GetDoor(cell.X, cell.Y) !=  null || _map.GetDoor(right.X, right.Y) != null || _map.GetDoor(left.X, left.Y) != null || _map.GetDoor(top.X, top.Y) != null || _map.GetDoor(bottom.X, bottom.Y) != null)
+            {
+                return false;
+            }
+
+            if (right.IsWalkable && left.IsWalkable && !top.IsWalkable && !bottom.IsWalkable)
+            {
+                return true;
+            }
+
+            if (!right.IsWalkable && !left.IsWalkable && top.IsWalkable && bottom.IsWalkable)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

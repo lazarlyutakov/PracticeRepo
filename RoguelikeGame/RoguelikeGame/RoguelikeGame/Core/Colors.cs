@@ -28,5 +28,10 @@ namespace RoguelikeGame.Core
 
         public static RLColor KoboldColor = Swatch.DbBrightWood;
         public static RLColor DzveroColor = Swatch.DbMetal;
+
+        public static RLColor DoorBackGround = Swatch.ComplimentDarkest;
+        public static RLColor Door = Swatch.ComplimentLighter;
+        public static RLColor DoorBackgroundFov = Swatch.ComplimentDarker;
+        public static RLColor DoorFov = Swatch.ComplimentLightest;
     }
 }
