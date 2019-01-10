@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import RedirectButton from './redirectButton'
 import './index.css'
 
 class Square extends React.Component {
@@ -10,19 +11,6 @@ class Square extends React.Component {
                 onClick={() => this.props.onClick()}
             >
                 {this.props.value}                  
-            </button>
-        )
-    }
-}
-
-class RedirectButton extends React.Component{
-    render(){
-        return(
-            <button
-                className="button"
-                onClick={ () => this.props.onClick() }
-            >
-                {this.props.value}
             </button>
         )
     }
