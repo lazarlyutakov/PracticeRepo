@@ -15,12 +15,27 @@ class Square extends React.Component {
     }
 }
 
+class RedirectButton extends React.Component{
+    render(){
+        return(
+            <button
+                className="button"
+                onClick={ () => this.props.onClick() }
+            >
+                {this.props.value}
+            </button>
+        )
+    }
+}
 
 class Board extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            squares: Array(9).fill(null)
+            squares: Array(9).fill(null),
+            test: {
+                name: 'GO TO SULTANBET'
+            }
         };
     }
 
@@ -28,6 +43,16 @@ class Board extends React.Component{
         const squares = this.state.squares.slice();
         squares[i] = 'X';
         this.setState({squares: squares});
+    }
+
+    handleButtonClick(){
+        window.open('https://sultanbet.com', '_blank');
+    }
+
+    renderRedirectButton(){
+        return(
+            <RedirectButton value={this.state.test.name} onClick = { () => this.handleButtonClick() }/>
+        )
     }
 
     renderSquare(i){
@@ -59,7 +84,11 @@ class Board extends React.Component{
                     {this.renderSquare(6)}
                     {this.renderSquare(7)}
                     {this.renderSquare(8)}      
-                </div> 
+                </div>
+                <br></br>
+                <div>
+                    {this.renderRedirectButton()}
+                </div>     
             </div>                    
         );
     }
