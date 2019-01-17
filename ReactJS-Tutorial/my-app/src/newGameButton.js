@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom';
 import './index.js'
 import './index.css'
 
-class RedirectButton extends React.Component{
+class NewGameButton extends React.Component{
     render(){
         return(
             <button
-                className="button"
+                className="newGameButton"
                 onClick={ () => this.props.onClick() }
             >
                 {this.props.value}
@@ -17,4 +17,4 @@ class RedirectButton extends React.Component{
     }
 }
 
-export default RedirectButton;
+export default NewGameButton;

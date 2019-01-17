@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import RedirectButton from './redirectButton'
+import NewGameButton from './newGameButton'
 import './index.css'
 
 function Square(props) {    
@@ -18,17 +19,18 @@ class Board extends React.Component{
             squares: Array(9).fill(null),
             xIsNext: true,
             test: {
-                name: 'GO TO SULTANBET'
+                name: 'GO TO SULTANBET',
+                name1: 'New game'
             }
         };
     }
 
     handleClick(i){
         const squares = this.state.squares.slice();
-        if(calculateWinner(this.squares) || squares[i]){
+        if(calculateWinner(squares) || squares[i]){
             return;
         }
-        squares[i] = this.state.xIsNext ? 'X' : '0'
+        squares[i] = this.state.xIsNext ? 'X' : 'O'
         this.setState({
             squares: squares,
             xIsNext: !this.state.xIsNext
@@ -39,9 +41,19 @@ class Board extends React.Component{
         window.open('https://sultanbet.com', '_blank');
     }
 
+    handleNewGameClick(){
+        window.location.reload();
+    }
+
     renderRedirectButton(){
         return(
             <RedirectButton value={this.state.test.name} onClick = { () => this.handleButtonClick() }/>
+        )
+    }
+
+    renderNewGameButton(){
+        return(
+            <NewGameButton value={this.state.test.name1} onClick = { () => this.handleNewGameClick() }/>
         )
     }
 
@@ -60,7 +72,7 @@ class Board extends React.Component{
         if(status){
             status = 'Winner ' + winner;
         } else{
-            status = 'Next player ' + (this.state.xIsNext ? 'X' : '0');
+            status = 'Next player ' + (this.state.xIsNext ? 'X' : 'O');
         }
 
         return (
@@ -84,7 +96,11 @@ class Board extends React.Component{
                 <br></br>
                 <div>
                     {this.renderRedirectButton()}
-                </div>     
+                </div>
+                <br></br>
+                <div>
+                    {this.renderNewGameButton()}
+                </div>      
             </div>                    
         );
     }
