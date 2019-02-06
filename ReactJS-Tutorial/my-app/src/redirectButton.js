@@ -10,9 +10,8 @@ class RedirectButton extends React.Component{
                 className="button"
                 onClick={ () => this.props.onClick() }
             >
-                {this.props.value}
-            </button>
-            
+                {this.props.value}               
+            </button>            
         )
     }
 }
