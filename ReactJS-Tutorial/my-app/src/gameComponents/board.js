@@ -1,7 +1,6 @@
 import React from 'react';
-import {Square} from './index.js';
-import './index.css'
-import NewGameButton from './newGameButton'
+import {Square} from './square.js';
+import NewGameButton from '../gameComponents/newGameButton'
 
 
 class Board extends React.Component{

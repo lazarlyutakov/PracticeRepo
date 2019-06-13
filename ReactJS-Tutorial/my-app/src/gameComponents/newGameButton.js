@@ -1,6 +1,4 @@
-import React from 'react';
-import './index.js'
-import './index.css'
+import React from 'react'
 
 class NewGameButton extends React.Component{
     render(){

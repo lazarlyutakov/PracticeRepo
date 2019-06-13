@@ -22,9 +22,11 @@ class Contact extends React.Component {
     }
 
   render() {
+      const { params } = this.props.match
     return (
         <div>
-            <h1>Contact</h1>                        
+            <h1>Contact</h1>
+            <p>{params.id}</p>                        
             {this.renderRedirectButton()}
         </div>
     ) 

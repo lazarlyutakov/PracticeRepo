@@ -1,6 +1,4 @@
 import React from 'react';
-import './index.js'
-import './index.css'
 
 class RedirectButton extends React.Component{
     render(){

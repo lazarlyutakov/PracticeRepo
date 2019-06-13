@@ -1,7 +1,6 @@
 import React from 'react';
 import Board from './board.js';
-import Helper from './helper.js';
-import './index.css'
+import Helper from '../helper';
 
 class Game extends React.Component{
     constructor(props) {

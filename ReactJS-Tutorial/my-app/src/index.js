@@ -1,20 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom'
-import Game from './game.js'
+import Game from './gameComponents/game.js'
 import './index.css'
-import Contact from './contact.js'
-import Home from './home.js'
-import Notfound from './notfound.js'
-
-
-function Square(props) {    
-        return(
-            <button className="square" onClick={props.onClick}>
-                {props.value}                  
-            </button>
-        )
-}
+import Contact from './redirection/contact.js'
+import Home from './redirection/home.js'
+import Notfound from './redirection/notfound.js'
 
 const routing = (
     <Router>
@@ -38,7 +29,3 @@ ReactDOM.render(
     routing,    
     document.getElementById('root')
 );
-
-
-
-export {Square} ;
