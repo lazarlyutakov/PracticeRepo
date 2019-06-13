@@ -4,10 +4,13 @@ class Home extends React.Component {
   render() {
     return (
       <div>
-        <h1>Кур за 10betChina</h1>
+        <h1>Кур за 10BetChina</h1>
             <ul>
                 <li>
                     <a href='/game'>Game</a>
+                </li>
+                <li>
+                    <a href='/register'>Register</a>                 
                 </li>
                 <li>
                     <a href='/contact'>Contact</a>                 

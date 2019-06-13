@@ -1,7 +1,10 @@
 import React from 'react'
 import RedirectButton from './redirectButton'
+import { Route, Link } from 'react-router-dom'
 
-class Contact extends React.Component {
+const Contact = ({match}) => <p>{match.params.id}</p>
+
+class Contacts extends React.Component {
     constructor(props){
         super(props);
         this.state={
@@ -9,7 +12,7 @@ class Contact extends React.Component {
                 name: 'GO TO SULTANBET',                
             }
         };
-    }
+    }    
     
     handleButtonClick(){
         window.open('https://sultanbet.com', '_blank');
@@ -22,15 +25,27 @@ class Contact extends React.Component {
     }
 
   render() {
-      const { params } = this.props.match
+      //const {url} = this.props.match
     return (
         <div>
             <h1>Contact</h1>
-            <p>{params.id}</p>                        
+            <strong>Select a contact</strong>
+            <ul>
+                <li>
+                    <Link to='/contact/1'>Contact 1</Link>
+                </li>
+                <li>
+                    <Link to='/contact/2'>Contact 2</Link>
+                </li>
+                <li>
+                    <Link to='/contact/3'>Contact 3</Link>
+                </li>
+            </ul>
+            <Route path='/contact/:id' component={Contact} />            
             {this.renderRedirectButton()}
         </div>
     ) 
         
   }
 }
-export default Contact
+export default Contacts

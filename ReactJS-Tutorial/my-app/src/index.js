@@ -3,9 +3,10 @@ import ReactDOM from 'react-dom'
 import { Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom'
 import Game from './gameComponents/game.js'
 import './index.css'
-import Contact from './redirection/contact.js'
+import Contacts from './redirection/contact.js'
 import Home from './redirection/home.js'
 import Notfound from './redirection/notfound.js'
+import Register from './redirection/register.js'
 
 const routing = (
     <Router>
@@ -18,8 +19,9 @@ const routing = (
         </div>
         <Switch>
             <Route exact path ='/' component={Home} />            
-            <Route path ='/contact' component={Contact} />
+            <Route path ='/contact' component={Contacts} />
             <Route path ='/game' component={Game} />
+            <Route path ='/register' component={Register} />            
             <Route component={Notfound} />                                    
         </Switch>
     </Router>    
