@@ -1,7 +1,6 @@
 import React from 'react';
 import {Square} from './index.js';
 import './index.css'
-import RedirectButton from './redirectButton'
 import NewGameButton from './newGameButton'
 
 
@@ -12,25 +11,14 @@ class Board extends React.Component{
            // squares: Array(9).fill(null),
             // xIsNext: true,
             test: {
-                name: 'GO TO SULTANBET',
                 name1: 'New game',
                 name2: 'KKKKKK'
             }
         };
     }    
 
-    handleButtonClick(){
-        window.open('https://sultanbet.com', '_blank');
-    }
-
     handleNewGameClick(){
         window.location.reload();
-    }
-
-    renderRedirectButton(){
-        return(            
-            <RedirectButton value={this.state.test.name} onClick = { () => this.handleButtonClick() }/>
-        )
     }
 
     renderNewGameButton(){
@@ -68,13 +56,11 @@ class Board extends React.Component{
                 </div>
                 <br></br>
                 <div>
-                    {this.renderRedirectButton()}
-                </div>
-                <br></br>
-                <div>
                     {this.renderNewGameButton()}
-                </div>                      
-            </div>                    
+                </div>
+                <br></br>              
+            </div>
+                                
         );
     }
 }

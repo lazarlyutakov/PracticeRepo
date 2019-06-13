@@ -25,8 +25,7 @@ var Helper = ({
                 return squares[a];
             }
         }
-        return null;
-    
+        return null;    
     }
 })
 
