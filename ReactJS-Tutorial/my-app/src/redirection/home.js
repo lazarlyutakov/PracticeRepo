@@ -1,6 +1,6 @@
 import React from 'react'
 
-class Home extends React.Component {
+class Home extends React.Component {  
   render() {
     return (
       <div>
@@ -14,10 +14,14 @@ class Home extends React.Component {
                 </li>
                 <li>
                     <a href='/contact'>Contact</a>                 
+                </li>
+                <li>
+                    <a href='/prazno'>Prazno - 404 - test</a>                 
                 </li>                                
             </ul>
       </div>
     )
   }
 }
+
 export default Home

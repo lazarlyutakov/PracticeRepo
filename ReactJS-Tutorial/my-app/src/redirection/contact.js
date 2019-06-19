@@ -22,7 +22,7 @@ class Contacts extends React.Component {
         return(            
             <RedirectButton value={this.state.test.name} onClick = { () => this.handleButtonClick() }/>
         )
-    }
+    }    
 
   render() {
       //const {url} = this.props.match
