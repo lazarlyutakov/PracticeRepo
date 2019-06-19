@@ -5,14 +5,20 @@ import React from 'react'
 class Register extends React.Component {
 
     onSubmit = () => {
+        const name = document.getElementById('name').value;
+        console.log('ime ' + name);
         this.props.history.push('/game');
+
+        return name;
     };
+
+
 
     render() {
         return(
             <form>
-                <input placeholder='name' type='name'/>
-                <input placeholder='email' type='email'/>
+                <input id='name' placeholder='name' type='name'/>
+                <input id='password' placeholder='email' type='email'/>
                 <button onClick={this.onSubmit}>Go to game</button>                
             </form>
         )

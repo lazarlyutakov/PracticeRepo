@@ -36,7 +36,7 @@ class Board extends React.Component{
     }
 
     render(){
-        return (
+        return (            
             <div>
                 <div className="board-row">
                     {this.renderSquare(0)}
