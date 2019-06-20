@@ -23,12 +23,15 @@ class Game extends React.Component{
             return;
         }
         squares[i] = this.state.xIsNext ? 'X' : 'O'
+
+        Helper.displayRowCol(i);
+
         this.setState({
             history: history.concat([{
                 squares: squares,
             }]),
             stepNumber: history.length,
-            xIsNext: !this.state.xIsNext
+            xIsNext: !this.state.xIsNext,
         });
     }
 
