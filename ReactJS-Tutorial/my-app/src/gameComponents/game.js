@@ -24,8 +24,6 @@ class Game extends React.Component{
         }
         squares[i] = this.state.xIsNext ? 'X' : 'O'
 
-        Helper.displayRowCol(i);
-
         this.setState({
             history: history.concat([{
                 squares: squares,
@@ -33,6 +31,44 @@ class Game extends React.Component{
             stepNumber: history.length,
             xIsNext: !this.state.xIsNext,
         });
+
+        let position = 'a';
+
+        switch(i) {
+            case 0:
+                position = 'row 1, col 1';
+              break;
+            case 1:
+                position = 'row 1, col 2';
+              break;
+            case 2:
+                position = 'row 1, col 3';
+              break;
+            case 3:
+                position = 'row 2, col 1';
+              break;
+            case 4:
+                position = 'row 2, col 2';
+              break;
+            case 5:
+                position = 'row 2, col 3';
+              break;
+            case 6:
+                position = 'row 3, col 1';
+              break;
+            case 7:
+                position = 'row 3, col 2';
+              break;
+            case 8:
+                position = 'row 3, col 3';
+              break;              
+            default:
+          }
+
+        let doc = document.getElementById('root');
+        let doc1 = document.createElement('div');
+        doc1.innerHTML = position;
+        doc.appendChild(doc1);
     }
 
     jumpTo(step){

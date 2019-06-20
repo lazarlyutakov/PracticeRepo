@@ -26,41 +26,7 @@ var Helper = ({
             }
         }
         return null;    
-    },
-
-    displayRowCol(i){
-        switch(i) {
-            case 0:
-                console.log('row 1, col 1')
-              break;
-            case 1:
-                console.log('row 1, col 2')
-              break;
-            case 2:
-                console.log('row 1, col 3')
-              break;
-            case 3:
-                console.log('row 2, col 1')
-              break;
-            case 4:
-                console.log('row 2, col 2')
-              break;
-            case 5:
-                console.log('row 2, col 3')
-              break;
-            case 6:
-                console.log('row 3, col 1')
-              break;
-            case 7:
-                console.log('row 3, col 2')
-              break;
-            case 8:
-                console.log('row 3, col 3')
-              break;              
-            default:
-              // code block
-          }
-    }
+    },    
 })
 
 export default Helper;
