@@ -65,10 +65,10 @@ class Game extends React.Component{
             default:
           }
 
-        let doc = document.getElementById('root');
-        let doc1 = document.createElement('div');
-        doc1.innerHTML = position;
-        doc.appendChild(doc1);
+        let root = document.getElementById('root');
+        let positionLine = document.createElement('div');
+        positionLine.innerHTML = position;
+        root.appendChild(positionLine);
     }
 
     jumpTo(step){
