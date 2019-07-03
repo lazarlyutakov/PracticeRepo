@@ -26,7 +26,47 @@ var Helper = ({
             }
         }
         return null;    
-    },    
+    },
+    
+    displayPositionLine(i){
+        let position = 'a';
+
+        switch(i) {
+            case 0:
+                position = 'row 1, col 1';
+              break;
+            case 1:
+                position = 'row 1, col 2';
+              break;
+            case 2:
+                position = 'row 1, col 3';
+              break;
+            case 3:
+                position = 'row 2, col 1';
+              break;
+            case 4:
+                position = 'row 2, col 2';
+              break;
+            case 5:
+                position = 'row 2, col 3';
+              break;
+            case 6:
+                position = 'row 3, col 1';
+              break;
+            case 7:
+                position = 'row 3, col 2';
+              break;
+            case 8:
+                position = 'row 3, col 3';
+              break;              
+            default:
+          }
+
+        let root = document.getElementById('root');
+        let positionLine = document.createElement('div');
+        positionLine.innerHTML = position;
+        root.appendChild(positionLine);
+      }
 })
 
 export default Helper;
