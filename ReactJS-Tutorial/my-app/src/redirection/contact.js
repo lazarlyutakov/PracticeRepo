@@ -1,20 +1,25 @@
 import React from 'react'
 import RedirectButton from './redirectButton'
-//import RenderContactInfo from './renderContactInfo'
+import RenderContactInfo from './renderContactInfo'
 import { Route, Link } from 'react-router-dom'
 
 const Contact = ({match}) => <div>{checkId(match)} </div>
 
 const checkId = (match) => {
     if(match.params.id === '1'){
-        // da se napravi s RenderContactInfo, koito da e otdelen komponent
-        return( <p>KUR 1</p>)            
+        return( 
+            <RenderContactInfo name='Pesho Geq' title='Master Gay'/>
+        )            
     }
     else if(match.params.id === '2'){
-        return( <p>KUR 2</p>) 
+            return(
+            <RenderContactInfo name='Paco Tigara' title='Vratarche'/>                
+            )         
     }
     else{
-        return( <p>KUR 3</p>) 
+        return(
+            <RenderContactInfo name='Koki Kosmonavta' title='Dyrvo'/>            
+        ) 
     }
 }
 
