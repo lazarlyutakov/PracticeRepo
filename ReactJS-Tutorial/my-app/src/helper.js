@@ -66,7 +66,15 @@ var Helper = ({
         let positionLine = document.createElement('div');
         positionLine.innerHTML = position;
         root.appendChild(positionLine);
-      }
+      },
+
+      pushToMovesArray(history, arr){
+        history.map((step, move) => {
+          if(move) {
+              arr.push(move);
+          }                               
+        });
+      },      
 })
 
 export default Helper;

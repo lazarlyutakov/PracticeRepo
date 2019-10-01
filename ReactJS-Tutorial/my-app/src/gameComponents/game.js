@@ -1,6 +1,12 @@
 import React from 'react';
 import Board from './board.js';
 import Helper from '../helper';
+import ToggleMovesButton from './toggleMovesButton';
+
+var toggleButtonValueStates = {
+    descending: 'Sort descending',
+    ascending: 'Sort ascending'
+  }
 
 class Game extends React.Component{
     constructor(props) {
@@ -11,6 +17,8 @@ class Game extends React.Component{
           }],
           stepNumber: 0,
           xIsNext: true,
+          toggleMovesButtonState: 'ascending',
+          toggleButtonValue: toggleButtonValueStates.descending
         };
       }
       
@@ -42,6 +50,38 @@ class Game extends React.Component{
         });
     }
 
+    handleToggleMovesButtonClick(){
+
+        let arr =[];
+        const history = this.state.history;
+        
+        Helper.pushToMovesArray(history, arr);
+
+        if(this.state.toggleMovesButtonState === 'ascending' && this.state.toggleButtonValue === toggleButtonValueStates.descending ) {
+            this.setState({
+                toggleMovesButtonState: 'descending',
+                toggleButtonValue: 'Sort ascending'
+            });
+
+            arr.reverse();
+            console.log(arr);
+        }
+        else if (this.state.toggleMovesButtonState === 'descending' && this.state.toggleButtonValue === toggleButtonValueStates.ascending) {
+            this.setState({
+                toggleMovesButtonState: 'ascending',
+                toggleButtonValue: 'Sort descending'
+            });
+
+            console.log(arr);
+        }        
+    }
+
+    renderToggleMovesButton() {
+        return(
+            <ToggleMovesButton class = {this.state.toggleMovesButtonState} value = {this.state.toggleButtonValue} onClick = { () => this.handleToggleMovesButtonClick()} />
+        )
+    }
+
     render(){
         const history = this.state.history;
         const current = history[this.state.stepNumber];
@@ -51,7 +91,7 @@ class Game extends React.Component{
             const desc = move ? 'Go to move #' + move : 'Go to game start';
             return(
                 <li key={move}>
-                    <button onClick = { () => this.jumpTo(move)}>{desc}</button>
+                    <button className = 'moveButton' onClick = { () => this.jumpTo(move)}>{desc}</button>
                 </li>
             );
         });
@@ -75,6 +115,8 @@ class Game extends React.Component{
                     <div>{status}</div>                                        
                     <ol>{moves}</ol>
                 </div>
+                <br></br>
+                <div>{this.renderToggleMovesButton()}</div>
             </div>
         );
     }
